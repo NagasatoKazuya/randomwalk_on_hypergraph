@@ -13,6 +13,7 @@ class HyperGraph():
         self.V = []
         self.E = []
         self.elist = {}
+        self.label = []
 
     def construct_hypergraph(self, V, E):
         # Construct a hypergraph from a set of nodes V and a set of hyperedges E.
@@ -27,46 +28,6 @@ class HyperGraph():
 
         return
 
-    def read_hypergraph(self, hypergraph_name):
-        # Read hypergraph named hypergraph_name.
-        # The corresponding files to read must be in the folder ./hyper-dk-series/data/.
-
-        f1_path = "../data/" + str(hypergraph_name) + "_nverts.txt"
-        f1 = open(f1_path, 'r')
-        f2_path = "../data/" + str(hypergraph_name) + "_hyperedges.txt"
-        f2 = open(f2_path, 'r')
-
-        lines1 = f1.readlines()
-        lines2 = f2.readlines()
-
-        self.__init__()
-        c = 0
-        e_i = 0
-        for line1 in lines1:
-            nv = int(line1[:-1].split(" ")[0])
-
-            e = []
-            for i in range(0, nv):
-                v = int(lines2[c+i][:-1])
-                e.append(v)
-
-            self.E.append(e)
-            for v in e:
-                if v not in self.V:
-                    self.V.append(v)
-                    self.elist[v] = []
-                self.elist[v].append(e_i)
-            c += nv
-            e_i += 1
-
-        f1.close()
-        f2.close()
-
-        print('Hypergraph named ' +str(hypergraph_name) + ' was read.')
-        print("Number of nodes:", len(self.V))
-        print("Number of hyperedges:", len(self.E))
-
-        return
 
     def add_node_to_hyperedge(self, v, e_i):
         # Add node v to hyperedge E[e_i]
