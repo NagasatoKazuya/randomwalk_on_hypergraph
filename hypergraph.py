@@ -13,6 +13,7 @@ class HyperGraph():
         self.V = []
         self.E = []
         self.elist = {}
+        self.adj = []
         self.label = []
 
     def construct_hypergraph(self, V, E):
